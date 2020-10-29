@@ -25,7 +25,7 @@ namespace PSCoreAppInsights.Cmdlets
         protected override void ProcessRecord()
         {
             ExceptionTelemetry exception = new ExceptionTelemetry(Exception);
-            AppInsightsClient.TrackTrace(Exception.Message, SeverityLevel.Error);
+            AppInsightsClient.TrackTrace(string.Format("ERROR: {0}", Exception.Message), SeverityLevel.Error);
             AppInsightsClient.TrackException(exception);
         }
     }
