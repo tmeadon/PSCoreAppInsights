@@ -49,7 +49,7 @@ namespace PSCoreAppInsights.Cmdlets
                     Message,
                     SeverityLevel.ToString(),
                     string.Join(", ", propertiesDict.Keys)));
-               
+
                 AppInsightsClient.TrackTrace(Message, SeverityLevel, propertiesDict);
             }
             else
