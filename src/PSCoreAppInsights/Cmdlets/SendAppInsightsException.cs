@@ -11,7 +11,7 @@ namespace PSCoreAppInsights.Cmdlets
     public class SendAppInsightsException : PSCmdlet
     {
         /// <summary>
-        /// <para type="description">A TelemetryClient instance (produced by running New-AppInsightsClient</para>
+        /// <para type="description">A TelemetryClient instance (produced by running New-AppInsightsClient)</para>
         /// </summary>
         [Parameter(Mandatory = true)]
         public TelemetryClient AppInsightsClient { get; set; }
