@@ -11,7 +11,7 @@ jobs:
 
     - name: Install InvokeBuild
       run: |
-        Install-Module -Name 'InvokeBuild'
+        Install-Module -Name 'InvokeBuild' -Force
     
     - name: build only
       env:
