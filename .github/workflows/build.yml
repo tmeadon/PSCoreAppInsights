@@ -2,6 +2,9 @@ name: PSCoreAppInsights
 
 on: push
 
+env:
+  MODULE_VERSION: 0.0.1
+
 jobs:
   build:
     runs-on: windows-latest
@@ -14,11 +17,8 @@ jobs:
         Install-Module -Name 'InvokeBuild' -Force
     
     - name: Build
-      env:
-        MODULE_VERSION: 0.0.1
-        BUILD_NUMBER: ${{ github.run_number }}
       run: |
-        Invoke-Build -File .\build\PSCoreAppInsights.build.ps1 -Task 'build' -NewVersionNumber ($env:MODULE_VERSION + "." + $env:BUILD_NUMBER)
+        Invoke-Build -File .\build\PSCoreAppInsights.build.ps1 -Task 'build' -NewVersionNumber $env:MODULE_VERSION
 
     - name: Publish
       env:
