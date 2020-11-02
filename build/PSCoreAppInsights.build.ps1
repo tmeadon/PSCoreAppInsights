@@ -15,7 +15,7 @@ task build CleanModule, BuildModule, CopyFiles
 task publish PublishToGallery
 
 $BuildRoot = (Get-Item -Path $BuildRoot).Parent.FullName
-$buildOutputPath = "$BuildRoot\build\output"
+$buildOutputPath = "$BuildRoot\build\output\PSCoreAppInsights"
 
 task CleanModule {
     if (Test-Path -Path $buildOutputPath -PathType Container)
