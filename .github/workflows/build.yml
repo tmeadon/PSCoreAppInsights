@@ -1,0 +1,21 @@
+name: PSCoreAppInsights
+
+on: push
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: build only
+      env:
+        MODULE_VERSION: 0.0.1
+      run: |
+        Invoke-Build -File .\build\PSCoreAppInsights.build.ps1 -NewVersionNumber ($env:MODULE_VERSION + "." + ${{ github.run_number }})
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: module
+        path: .\build\output\
