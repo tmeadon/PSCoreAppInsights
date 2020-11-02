@@ -8,12 +8,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+
+    - name: Install InvokeBuild
+      run: |
+        Install-Module -Name 'InvokeBuild'
     
     - name: build only
       env:
         MODULE_VERSION: 0.0.1
       run: |
-        Invoke-Build -File .\build\PSCoreAppInsights.build.ps1 -NewVersionNumber ($env:MODULE_VERSION + "." + ${{ github.run_number }})
+        Invoke-Build -File .\build\PSCoreAppInsights.build.ps1 -Task 'build' -NewVersionNumber ($env:MODULE_VERSION + "." + ${{ github.run_number }})
 
     - uses: actions/upload-artifact@v2
       with:
