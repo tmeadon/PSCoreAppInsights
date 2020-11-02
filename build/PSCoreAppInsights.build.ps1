@@ -11,7 +11,7 @@ param
     $PsGalleryKey
 )
 
-task build CleanModule, BuildModule, CopyFiles
+task build CleanModule, BuildModule, CopyFiles, UpdateVersion
 task publish PublishToGallery
 
 $BuildRoot = (Get-Item -Path $BuildRoot).Parent.FullName
@@ -30,7 +30,7 @@ task BuildModule {
 }
 
 task CopyFiles {
-    New-Item -ItemType Directory -Path $buildOutputPath -ErrorAction SilentlyContinue
+    New-Item -ItemType Directory -Path $buildOutputPath -ErrorAction SilentlyContinue -Force
     Copy-Item -Path "$BuildRoot\src\PSCoreAppInsights.ps*" -Destination $buildOutputPath
     Copy-Item -Path "$BuildRoot\src\PSCoreAppInsights\bin\Release\netstandard2.0\publish" -Destination "$buildOutputPath\bin" -Recurse
 }
@@ -38,7 +38,7 @@ task CopyFiles {
 task UpdateVersion {
     if ($NewVersionNumber)
     {
-        Update-ModuleManifest -Path "$BuildRoot\PSCoreAppInsights.psd1" -ModuleVersion $NewVersionNumber
+        Update-ModuleManifest -Path "$buildOutputPath\PSCoreAppInsights.psd1" -ModuleVersion $NewVersionNumber
     }
 }
 
