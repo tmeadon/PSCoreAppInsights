@@ -13,11 +13,19 @@ jobs:
       run: |
         Install-Module -Name 'InvokeBuild' -Force
     
-    - name: build only
+    - name: Build
       env:
         MODULE_VERSION: 0.0.1
+        BUILD_NUMBER: ${{ github.run_number }}
       run: |
-        Invoke-Build -File .\build\PSCoreAppInsights.build.ps1 -Task 'build' -NewVersionNumber ($env:MODULE_VERSION + "." + ${{ github.run_number }})
+        Invoke-Build -File .\build\PSCoreAppInsights.build.ps1 -Task 'build' -NewVersionNumber ($env:MODULE_VERSION + "." + $env:BUILD_NUMBER)
+
+    - name: Publish
+      env:
+        PSGALLERY_KEY: ${{ secrets.PSGALLERY_KEY }}
+      run: |
+        Invoke-Build -File .\build\PSCoreAppInsights.build.ps1 -Task 'publish' -PsGalleryKey $env:PSGALLERY_KEY
+      if: github.ref == 'refs/heads/main'
 
     - uses: actions/upload-artifact@v2
       with:
