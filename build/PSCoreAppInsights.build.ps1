@@ -11,8 +11,8 @@ param
     $PsGalleryKey
 )
 
-task buildOnly CleanModule, BuildModule, CopyFiles
-task buildAndPublish
+task build CleanModule, BuildModule, CopyFiles
+task publish PublishToGallery
 
 $BuildRoot = (Get-Item -Path $BuildRoot).Parent.FullName
 $buildOutputPath = "$BuildRoot\build\output"
