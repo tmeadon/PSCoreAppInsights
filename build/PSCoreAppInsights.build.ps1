@@ -47,5 +47,5 @@ task PublishToGallery {
     {
         throw "You must supply a value for the the -PSGalleryKey in order to run this task"
     }
-    Publish-Module -Path $buildOutputPath -NuGetApiKey $PsGalleryKey -Repository 'PSGallery'
+    Publish-Module -Path $buildOutputPath -NuGetApiKey $PsGalleryKey -Repository 'PSGallery' -Force
 }
