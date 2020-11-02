@@ -1,6 +1,9 @@
 name: PSCoreAppInsights
 
-on: push
+on:
+  push:
+    paths-ignore:
+      - '**/README.md'
 
 env:
   MODULE_VERSION: 0.0.1
