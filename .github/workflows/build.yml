@@ -6,7 +6,7 @@ on:
       - '**/README.md'
 
 env:
-  MODULE_VERSION: 0.0.1
+  MODULE_VERSION: 0.1.0
 
 jobs:
   build:
