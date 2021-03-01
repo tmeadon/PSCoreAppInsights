@@ -46,6 +46,24 @@ namespace PSCoreAppInsights.Cmdlets
         [Parameter()]
         public string Data { get; set; }
 
+        /// <summary>
+        /// <para type="description">Type of dependency (e.g. MyCustomApi)</para>
+        /// </summary>
+        [Parameter()]
+        public string Type { get; set; }
+
+        /// <summary>
+        /// <para type="description">Status code returned from the dependency</para>
+        /// </summary>
+        [Parameter()]
+        public string ResultCode { get; set; }
+
+        /// <summary>
+        /// <para type="description">Whether the call to the dependency was successful or not</para>
+        /// </summary>
+        [Parameter()]
+        public bool Success { get; set; } = true;
+
         protected override void ProcessRecord()
         {
             WriteVerbose(string.Format("Sending dependency {0} with target {1}", Name, Hostname));
@@ -55,7 +73,10 @@ namespace PSCoreAppInsights.Cmdlets
                 Name = Name,
                 Duration = Duration,
                 Target = Hostname,
-                Data = Data
+                Data = Data,
+                Type = Type,
+                ResultCode = ResultCode,
+                Success = Success
             };
 
             AppInsightsClient.TrackDependency(dependency);
