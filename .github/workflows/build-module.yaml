@@ -42,3 +42,4 @@ jobs:
       run: |
         Invoke-Build -File .\build\PSCoreAppInsights.build.ps1 -Task 'publish' -PsGalleryKey $env:PSGALLERY_KEY -NewVersionNumber ($env:GITHUB_REF).replace("refs/tags/v","")
       if: startsWith(github.ref, 'refs/tags/v')
+      
