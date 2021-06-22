@@ -11,8 +11,8 @@ param
     $PsGalleryKey
 )
 
-task build CleanModule, BuildModule, CopyFiles, UpdateVersion
-task publish PublishToGallery
+task build CleanModule, BuildModule, CopyFiles
+task publish UpdateVersion, PublishToGallery
 
 $BuildRoot = (Get-Item -Path $BuildRoot).Parent.FullName
 $buildOutputPath = "$BuildRoot\build\output\PSCoreAppInsights"
