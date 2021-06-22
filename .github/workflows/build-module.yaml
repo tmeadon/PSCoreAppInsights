@@ -19,10 +19,12 @@ jobs:
         dotnet-version: 5.0.x
 
     - name: install InvokeBuild
+      shell: pwsh
       run: |
         Install-Module -Name 'InvokeBuild' -Force
 
     - name: build
+      shell: pwsh
       run: |
         Invoke-Build -File .\build\PSCoreAppInsights.build.ps1 -Task 'build'
 
