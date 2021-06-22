@@ -1,0 +1,45 @@
+name: build
+
+on:
+  push:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: git checkout
+      uses: actions/checkout@v2
+
+    - name: setup .net
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+
+    - name: install InvokeBuild
+      shell: pwsh
+      run: |
+        Install-Module -Name 'InvokeBuild' -Force
+
+    - name: build
+      shell: pwsh
+      run: |
+        Invoke-Build -File .\build\PSCoreAppInsights.build.ps1 -Task 'build'
+
+    - name: upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: PSCoreAppInsights
+        path: build/output
+
+    - name: publish to psgallery
+      shell: pwsh
+      env:
+        PSGALLERY_KEY: ${{ secrets.PSGALLERY_KEY }}
+        GITHUB_REF: ${{ github.ref }}
+      run: |
+        Invoke-Build -File .\build\PSCoreAppInsights.build.ps1 -Task 'publish' -PsGalleryKey $env:PSGALLERY_KEY -NewVersionNumber ($env:GITHUB_REF).replace("refs/tags/v","")
+      if: startsWith(github.ref, 'refs/tags/v')
+      

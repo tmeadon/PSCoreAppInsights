@@ -11,8 +11,8 @@ param
     $PsGalleryKey
 )
 
-task build CleanModule, BuildModule, CopyFiles, UpdateVersion
-task publish PublishToGallery
+task build CleanModule, BuildModule, CopyFiles
+task publish UpdateVersion, PublishToGallery
 
 $BuildRoot = (Get-Item -Path $BuildRoot).Parent.FullName
 $buildOutputPath = "$BuildRoot\build\output\PSCoreAppInsights"
@@ -22,11 +22,11 @@ task CleanModule {
     {
         Remove-Item -Path $buildOutputPath -Recurse
     }
-    dotnet.exe clean "$BuildRoot\src\PSCoreAppInsights\PSCoreAppInsights.sln" -c release
+    dotnet clean "$BuildRoot\src\PSCoreAppInsights\PSCoreAppInsights.sln" -c release
 }
 
 task BuildModule {
-    dotnet.exe publish "$BuildRoot\src\PSCoreAppInsights\PSCoreAppInsights.sln" -c release
+    dotnet publish "$BuildRoot\src\PSCoreAppInsights\PSCoreAppInsights.sln" -c release
 }
 
 task CopyFiles {
