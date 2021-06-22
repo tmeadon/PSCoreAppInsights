@@ -32,7 +32,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: PSCoreAppInsights
-        path: build\output\PSCoreAppInsights
+        path: build/output
 
     - name: publish to psgallery
       shell: pwsh
